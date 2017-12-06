@@ -6,6 +6,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.*;
+import java.sql.Date;
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 
 import org.json.simple.JSONArray;
@@ -18,19 +21,31 @@ public class Main {
 
 	static String email = "stibo123@gmail.com";
 	static String passwort = "bartosPWDStage";
-	static String url = "https://s1.mogree.com/swync/api/v2/companyapi/auth?mail=";
+	static String url_auth = "https://s1.mogree.com/swync/api/v2/companyapi/auth";
+	static String url_getcontacts = "https://s1.mogree.com/swync/api/v2/companyapi/contacts;
+	
 	static String salt = "";
 	static LoginData loginData;
 	static UserData datafromuser;
 	
+	static List<Contact> contacts;
+	
 	public static void main(String[] args) {
 
-	String newurl = url + email + "&password=" + Decrypt(passwort, salt);
+	String newurl = url_auth + "?mail=" + email + "&password=" + Decrypt(passwort, salt);
 	System.out.println("URL: " + newurl);
-	String auth = Auth(newurl);
+	
+	String auth = Downloader(newurl);
 	System.out.println("JSON: "+auth);
 	parseAuth(auth);
 	
+	contacts = getContacts(loginData.getAuthtoken(), loginData.getUserid(),url_getcontacts);
+	}
+
+	private static List<Contact> getContacts(String authtoken, long userid, String url) {
+		String data = Downloader(url + "?userid=" + userid + "?authtoken=" + authtoken + "&timestamp" + LocalDateTime.now());
+		System.out.println(data);
+		return null;
 	}
 
 	private static String Decrypt(String passwort, String salt) {
@@ -51,7 +66,7 @@ public class Main {
 				return generatedPassword;
 	}
 
-	public static String Auth(String url)
+	public static String Downloader(String url)
 	{
 
 			try {
