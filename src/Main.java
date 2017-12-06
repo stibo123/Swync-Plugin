@@ -43,7 +43,7 @@ public class Main {
 	}
 
 	private static List<Contact> getContacts(String authtoken, long userid, String url) {
-		String data = Downloader(url + "?userid=" + userid + "?authtoken=" + authtoken + "&timestamp" + LocalDateTime.now());
+		String data = Downloader(url + "?userid=" + userid + "&token=" + authtoken);
 		System.out.println(data);
 		return null;
 	}
@@ -71,7 +71,7 @@ public class Main {
 
 			try {
 				URL oracle = new URL(url);
-
+				
 			HttpURLConnection httpconnection = (HttpURLConnection) oracle.openConnection();
 			BufferedReader in = new BufferedReader(new InputStreamReader(
 			httpconnection.getInputStream()));
@@ -115,7 +115,7 @@ public class Main {
 			boolean iscontact = (boolean) userdata.get("iscontact");
 			long type_userdata = (long) userdata.get("type");
 			long itemproviderid_userdata = (long) userdata.get("itemproviderid");
-			long detailtype_userdata = (long) userdata.get("detailtype");
+			long detailtype_userdata = (long) userdata.get("detailtype"); 
 			
             String itemid = (String) jsonObject.get("itemid");
             long type = (long) jsonObject.get("type");
