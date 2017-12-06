@@ -22,7 +22,7 @@ public class Main {
 	static String email = "stibo123@gmail.com";
 	static String passwort = "bartosPWDStage";
 	static String url_auth = "https://s1.mogree.com/swync/api/v2/companyapi/auth";
-	static String url_getcontacts = "https://s1.mogree.com/swync/api/v2/companyapi/contacts;
+	static String url_getcontacts = "https://s1.mogree.com/swync/api/v2/companyapi/contacts";
 	
 	static String salt = "";
 	static LoginData loginData;
